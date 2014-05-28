@@ -1,0 +1,12 @@
+
+# nucleide surface production rate
+P_0: 5.09
+
+# sample site latitude [degrees]
+latitude: 50.78
+
+# sample site altitude [meters]
+altitude: 109.0
+
+# pressure [hPa]
+pressure: 1000.224
