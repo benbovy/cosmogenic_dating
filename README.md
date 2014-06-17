@@ -1,8 +1,21 @@
 cosmogenic_dating
 =================
 
-Some Python code and IPython notebooks to infer exposure times and erosion rates from measured cosmogenic nucleide concentration profiles.
+A few IPython notebooks to show examples of inference of exposure times and
+erosion rates from measured cosmogenic nucleide concentration profiles.
 
-It demonstrates both bayesian and maximum likelihood approachs with different minimization or sampling alogrithms (grid search, Markov Chain Monte Carlo...).
+It compares both bayesian and maximum likelihood approachs with different
+optimization and/or sampling algorithms (grid search, non-linear fitting, MCMC...).
 
-NOTE: Currently in development!!
+
+Links to static versions of the notebooks (nbviewer)
+----------------------------------------------------
+
+TODO
+
+
+Licence
+-------
+
+Author: B. Bovy
+License: MIT (see LICENSE)

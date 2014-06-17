@@ -29,9 +29,10 @@ def generate_dataset(model, model_args, model_kwargs=None,
         depths min and max values
     n : int
         sample size
-    err : [float, float]
+    err : float or [float, float]
+        fixed error (one value given) or
         error magnitude and error variability
-        (see below)
+        (two values given, see below)
     
     Returns
     -------
@@ -43,15 +44,19 @@ def generate_dataset(model, model_args, model_kwargs=None,
     concentration values predicted by
     the model + random perturbations.
     
-    Each perturbation is generated using a Gaussian
+    When one value is given for `err`, the
+    parturbations are all generated using a
+    Gaussian of mu=0 and sigma=fixed error.
+    
+    When two values are given for `err`, each
+    perturbation is generated using a Gaussian
     of mu=0 and sigma given by another Gaussian: 
     
     mu =  sqrt(concentration) * error magnitude
-    std = sqrt(concentration) * error variability
+    sigma = sqrt(concentration) * error variability
     
     """
 
-    err_magnitude, err_variability = err
     zmin, zmax = zlimits
     model_kwargs = model_kwargs or dict()
     
@@ -64,13 +69,18 @@ def generate_dataset(model, model_args, model_kwargs=None,
                               *model_args,
                               **model_kwargs)
 
-    err_mu = err_magnitude * np.sqrt(profile_data['C'])
-    err_sigma = err_variability * np.sqrt(profile_data['C'])
+    try:
+        err_magn, err_var = err
+        
+        err_mu = err_magn * np.sqrt(profile_data['C'])
+        err_sigma = err_var * np.sqrt(profile_data['C'])
 
-    profile_data['std'] = np.array(
-        [np.random.normal(loc=mu, scale=sigma)
-         for mu, sigma in zip(err_mu, err_sigma)]
-        )
+        profile_data['std'] = np.array(
+            [np.random.normal(loc=mu, scale=sigma)
+             for mu, sigma in zip(err_mu, err_sigma)]
+            )
+    except TypeError:
+        profile_data['std'] = np.ones_like(depths) * err
 
     error = np.array([np.random.normal(scale=std)
                       for std in profile_data['std']])
