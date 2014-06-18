@@ -1,6 +1,7 @@
 
 """
-Create generic datasets of nucleide concentration.
+Create generic datasets of
+nuclide concentrations vs. depth.
 
 """
 
@@ -14,7 +15,7 @@ def generate_dataset(model, model_args, model_kwargs=None,
                      zlimits=[50, 500], n=10,
                      err=[20., 5.]):
     """
-    Create a generic dataset of nucleide concentration
+    Create a generic dataset of nuclide concentrations
     vs. depth (for testing).
     
     Parameters

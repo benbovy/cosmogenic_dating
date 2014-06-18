@@ -1,7 +1,7 @@
 
 """
-Models for calculating cosmogenic nucleide concentration
-profiles
+Models for calculating profiles of cosmogenic nuclide
+concentration vs. depth
 
 Author: B. Bovy
 """
@@ -12,26 +12,26 @@ import numpy as np
 
 
 def _particle_contrib(depth, erosion, exposure, density,
-                      nucleide, particle):
+                      nuclide, particle):
     """
     Contribution of a specific particle type
-    to the nucleide concentration.
+    to the nuclide concentration.
     """
     return (
         particle['prod_rate'] / ((density * erosion / 
                                   particle['damping_depth']) 
-                                 + nucleide['rdecay']) *
+                                 + nuclide['rdecay']) *
         np.exp(-1. * density * depth / particle['damping_depth']) *
         (1. - np.exp(-1. * exposure * ((erosion * density / 
                                        particle['damping_depth'])
-                                       + nucleide['rdecay'])))
+                                       + nuclide['rdecay'])))
     )
 
 
-def C_nucleide(depth, erosion, exposure, density,
-               inheritance, nucleide, particles):
+def C_nuclide(depth, erosion, exposure, density,
+              inheritance, nuclide, particles):
     """
-    Calculate the concentration(s) of a nucleide
+    Calculate the concentration(s) of a nuclide
     at given depth(s) (generic function).
     
     Parameters
@@ -45,19 +45,19 @@ def C_nucleide(depth, erosion, exposure, density,
     density : float or array_like
         soil density [g cm-3]
     inheritance : float or array_like
-        concentration of the nucleide at the
+        concentration of the nuclide at the
         initiation of the exposure scenario
         [atoms g-1]
-    nucleide : dict
-        nucleide parameters
+    nuclide : dict
+        nuclide parameters
     particles : [dict, dict, ...]
         parameters related to each particule type
-        that contribute to the nucleide production
+        that contribute to the nuclide production
     
     Returns
     -------
     float or array-like (broadcasted)
-        the nucleide concentration(s) [atoms g-1]
+        the nuclide concentration(s) [atoms g-1]
     
     Notes
     -----
@@ -76,17 +76,17 @@ def C_nucleide(depth, erosion, exposure, density,
     return (
         np.sum((_particle_contrib(depth, erosion, 
                                   exposure, density,
-                                  nucleide, p)
+                                  nuclide, p)
                 for p in particles),
                axis=0) +
-        inheritance * np.exp(-1. * nucleide['rdecay'] * exposure)
+        inheritance * np.exp(-1. * nuclide['rdecay'] * exposure)
     )
 
 
 def C_10Be(depth, erosion, exposure, density, inheritance,
            P_0=5.):
     """
-    A model for 10Be nucleide concentration profiles.
+    A model for profiles of 10Be concentration vs. depth.
     
     Notes
     -----
@@ -108,10 +108,10 @@ def C_10Be(depth, erosion, exposure, density, inheritance,
     
     See Also
     --------
-    C_nucleide
+    C_nuclide
     
     """
-    # nucleide parameters
+    # nuclide parameters
     berillium10 = {'rdecay': math.log(2.) / 1.36e6}
     
     # particles parameters
@@ -122,7 +122,7 @@ def C_10Be(depth, erosion, exposure, density, inheritance,
     fast_muons = {'prod_rate': 0.0065 * P_0,
                   'damping_depth': 5300.}
     
-    return C_nucleide(depth, erosion, exposure,
-                      density, inheritance,
-                      berillium10,
-                      [neutrons, slow_muons, fast_muons])
+    return C_nuclide(depth, erosion, exposure,
+                     density, inheritance,
+                     berillium10,
+                     [neutrons, slow_muons, fast_muons])

@@ -1,6 +1,7 @@
 
 """
-An implementation of MLE and the Bayesian approach using the Grid-Search method.
+An implementation of MLE and the Bayesian approach
+using the Grid-Search method.
 
 """
 
@@ -373,24 +374,24 @@ class CosmogenicInferenceGC():
         self.ppd_corrmat = None
         self.M_ppds_1d = None
     
-    def set_profile_measured(self, depth, C, std, nucleide,
+    def set_profile_measured(self, depth, C, std, nuclide,
                              **kwargs):
         """
-        Set the measured nucleide concentration profile.
+        Set the measured nuclide concentration profile.
         
         Parameters
         ----------
         depth : 1-d array_like
             the depth values
         C : 1-d array_like
-            the measured nucleide concentration
+            the measured nuclide concentration
             values
         std : 1-d array_like
             the standard deviation of the measured
             concentrations
-        nucleide : 1-d array_like
+        nuclide : 1-d array_like
             allow to distinguish concatenated profiles
-            of multiple nucleides
+            of multiple nuclides
         **kwargs : name=value, name=value...
             any other information to provide about
             the profile
@@ -399,7 +400,7 @@ class CosmogenicInferenceGC():
         self.oprofile['depth'] = np.array(depth)
         self.oprofile['C'] = np.array(C)
         self.oprofile['std'] = np.array(std)
-        self.oprofile['nucleide'] = np.array(nucleide)
+        self.oprofile['nuclide'] = np.array(nuclide)
         self.oprofile.update(kwargs)
         
     def set_profile_model(self, func):
@@ -473,7 +474,7 @@ class CosmogenicInferenceGC():
     
     def compute_mprofiles(self):
         """
-        Calculate the predicted nucleide concentration
+        Calculate the predicted nuclide concentration
         vs. depth profiles at every node of the
         sampling grid.
         """
