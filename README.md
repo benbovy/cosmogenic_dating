@@ -30,6 +30,10 @@ Bayesian approach w/ MCMC:
 - [2 free parameters][8]
 - [4 free parameters][9]
 
+Bayesian approach w/ MCMC (more robust, based on [emcee][10]:
+- [2 free parameters][11]
+- [4 free parameters][12]
+
 
 [1]: http://nbviewer.ipython.org/github/benbovy/cosmogenic_dating/blob/master/Inference_Notes.ipynb
 [2]: http://nbviewer.ipython.org/github/benbovy/cosmogenic_dating/blob/master/Models.ipynb
@@ -40,6 +44,9 @@ Bayesian approach w/ MCMC:
 [7]: http://nbviewer.ipython.org/github/benbovy/cosmogenic_dating/blob/master/MLE_test_4params.ipynb
 [8]: http://nbviewer.ipython.org/github/benbovy/cosmogenic_dating/blob/master/Bayes_test_2params.ipynb
 [9]: http://nbviewer.ipython.org/github/benbovy/cosmogenic_dating/blob/master/Bayes_test_4params.ipynb
+[10]: http://dan.iel.fm/emcee/current/
+[11]: http://nbviewer.ipython.org/github/benbovy/cosmogenic_dating/blob/master/emcee_test_2params.ipynb
+[12]: http://nbviewer.ipython.org/github/benbovy/cosmogenic_dating/blob/master/emcee_test_4params.ipynb
 
 
 Licence
