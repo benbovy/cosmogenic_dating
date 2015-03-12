@@ -1,11 +1,11 @@
 # 10Be surface production rate
-P_0: 6.13
+P_0: 9.51
 
 # sample site latitude [degrees]
-latitude: 50.39
+latitude: 36.852
 
 # sample site altitude [meters]
-altitude: 283.0
+altitude: 985.
 
 # pressure [hPa]
-pressure: 979.711
+pressure: 995.004

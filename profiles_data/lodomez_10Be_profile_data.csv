@@ -1,4 +1,4 @@
-"sample" "depth_cm" "depth_g-cm-2" "C_" "std" "nucleide"
+"sample" "depth" "depth_g-cm-2" "C" "std" "nuclide"
 "s01" 250 451 43005  1695  "10Be"
 "s02" 200 361 94800  2024  "10Be"
 "s03" 165 298 148569 3621  "10Be"

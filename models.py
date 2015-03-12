@@ -93,7 +93,7 @@ def C_10Be(depth, erosion, exposure, density, inheritance,
     The following parameters are used
     (Braucher et al. 2003)
     
-    10Be radioactive decay: log 2 / 1.36e6
+    10Be radioactive decay: log(2) / 1.36e6
     
     Contribution of
     - neutrons
@@ -125,4 +125,49 @@ def C_10Be(depth, erosion, exposure, density, inheritance,
     return C_nuclide(depth, erosion, exposure,
                      density, inheritance,
                      berillium10,
+                     [neutrons, slow_muons, fast_muons])
+
+
+def C_26Al(depth, erosion, exposure, density, inheritance,
+           P_0=35.):
+    """
+    A model for profiles of 26Al concentration vs. depth.
+    
+    Notes
+    -----
+    The following parameters are used
+    (Braucher et al. 2003)
+    
+    26Al radioactive decay: log(2) / 0.72e6
+    
+    Contribution of
+    - neutrons
+        - production rate: 0.9785 * P_0
+        - damping depth: 160
+    - slow muons
+        - production rate: 0.015 * P_0
+        - damping depth: 1500
+    - fast muons
+        - production rate: 0.0065 * P_0
+        - damping depth: 5300
+    
+    See Also
+    --------
+    C_nuclide
+    
+    """
+    # nuclide parameters
+    aluminium26 = {'rdecay': math.log(2.) / 0.72e6}
+    
+    # particles parameters
+    neutrons = {'prod_rate': 0.9785 * P_0,
+                'damping_depth': 160.}
+    slow_muons = {'prod_rate': 0.015 * P_0,
+                  'damping_depth': 1500.}
+    fast_muons = {'prod_rate': 0.0065 * P_0,
+                  'damping_depth': 5300.}
+    
+    return C_nuclide(depth, erosion, exposure,
+                     density, inheritance,
+                     aluminium26,
                      [neutrons, slow_muons, fast_muons])
